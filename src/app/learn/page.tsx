@@ -47,35 +47,30 @@ const learningPath = [
 
 export default function LearnPage() {
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen gradient-bg">
       {/* 导航栏 */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-xl border-b border-white/10">
-        <div className="max-w-6xl mx-auto px-6 py-4">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-black/50 backdrop-blur-xl border-b border-white/5">
+        <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <Link href="/" className="text-xl font-bold text-white">
-              🦞 OpenClaw
+            <Link href="/" className="text-2xl font-bold">
+              🦞 <span className="text-gradient">OpenClaw</span>
             </Link>
             <div className="hidden md:flex items-center gap-8">
               <Link href="/learn" className="text-sm text-white transition">学习路径</Link>
               <Link href="/tutorials" className="text-sm text-gray-400 hover:text-white transition">教程库</Link>
               <Link href="/skills" className="text-sm text-gray-400 hover:text-white transition">技能市场</Link>
             </div>
-            <button className="md:hidden text-gray-400">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
           </div>
         </div>
       </nav>
 
       {/* Header */}
-      <header className="pt-40 pb-16 px-6">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            7 天学习路径
+      <header className="pt-40 pb-20 px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
+            <span className="text-gradient">7 天</span> 学习路径
           </h1>
-          <p className="text-lg text-gray-400">
+          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
             从入门到精通，每天一个主题
           </p>
         </div>
@@ -84,30 +79,36 @@ export default function LearnPage() {
       {/* Learning Path */}
       <div className="max-w-4xl mx-auto px-6 py-12">
         <div className="space-y-4">
-          {learningPath.map((day) => (
+          {learningPath.map((day, index) => (
             <div
               key={day.day}
-              className="p-6 bg-white/5 rounded-xl border border-white/10"
+              className="card p-6 rounded-xl relative overflow-hidden"
             >
-              <div className="flex items-start gap-4 mb-4">
-                <div className="w-10 h-10 bg-white text-black text-lg font-bold rounded-full flex items-center justify-center flex-shrink-0">
-                  {day.day}
+              {/* 连接线 */}
+              {index < learningPath.length - 1 && (
+                <div className="absolute left-8 top-20 bottom-0 w-px bg-gradient-to-b from-blue-500/50 to-transparent hidden md:block"></div>
+              )}
+              
+              <div className="flex items-start gap-6">
+                {/* 天数圆形 */}
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center flex-shrink-0 shadow-lg shadow-blue-500/30">
+                  <span className="text-2xl font-bold text-white">{day.day}</span>
                 </div>
-                <div className="flex-1">
-                  <h2 className="text-xl font-bold text-white mb-1">
+                
+                {/* 内容 */}
+                <div className="flex-1 pt-2">
+                  <h2 className="text-xl font-bold text-white mb-2">
                     Day {day.day}: {day.title}
                   </h2>
-                  <p className="text-gray-400 text-sm">{day.description}</p>
-                </div>
-              </div>
-              <div className="pl-14">
-                <div className="grid sm:grid-cols-2 gap-2">
-                  {day.topics.map((topic, i) => (
-                    <div key={i} className="flex items-center gap-2 text-sm text-gray-400">
-                      <span className="w-1.5 h-1.5 bg-blue-400 rounded-full flex-shrink-0"></span>
-                      {topic}
-                    </div>
-                  ))}
+                  <p className="text-gray-400 mb-4">{day.description}</p>
+                  <div className="grid sm:grid-cols-2 gap-2">
+                    {day.topics.map((topic, i) => (
+                      <div key={i} className="flex items-center gap-2 text-sm text-gray-400">
+                        <span className="w-1.5 h-1.5 bg-blue-400 rounded-full flex-shrink-0"></span>
+                        {topic}
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -116,7 +117,7 @@ export default function LearnPage() {
       </div>
 
       {/* CTA */}
-      <section className="py-16 px-6 border-t border-white/10">
+      <section className="py-16 px-6 border-t border-white/5">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-2xl font-bold text-white mb-4">
             准备好开始了吗
@@ -127,13 +128,13 @@ export default function LearnPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/tutorials"
-              className="inline-flex items-center justify-center px-8 py-3 bg-white text-black font-medium rounded-lg hover:bg-gray-100 transition"
+              className="btn-gradient inline-flex items-center justify-center px-8 py-4 text-white font-semibold rounded-xl"
             >
               浏览教程
             </Link>
             <Link
               href="/skills"
-              className="inline-flex items-center justify-center px-8 py-3 border border-white/20 text-white font-medium rounded-lg hover:bg-white/5 transition"
+              className="inline-flex items-center justify-center px-8 py-4 bg-white/5 border border-white/20 text-white font-semibold rounded-xl hover:bg-white/10 transition backdrop-blur-sm"
             >
               探索技能
             </Link>
@@ -142,7 +143,7 @@ export default function LearnPage() {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-6 border-t border-white/10">
+      <footer className="py-12 px-6 border-t border-white/5">
         <div className="max-w-6xl mx-auto text-center text-gray-500 text-sm">
           © 2026 OpenClaw 社区
         </div>

@@ -3,45 +3,40 @@ import { tutorials } from '@/data/tutorials';
 
 export default function TutorialsPage() {
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen gradient-bg">
       {/* 导航栏 */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-xl border-b border-white/10">
-        <div className="max-w-6xl mx-auto px-6 py-4">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-black/50 backdrop-blur-xl border-b border-white/5">
+        <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <Link href="/" className="text-xl font-bold text-white">
-              🦞 OpenClaw
+            <Link href="/" className="text-2xl font-bold">
+              🦞 <span className="text-gradient">OpenClaw</span>
             </Link>
             <div className="hidden md:flex items-center gap-8">
               <Link href="/learn" className="text-sm text-gray-400 hover:text-white transition">学习路径</Link>
               <Link href="/tutorials" className="text-sm text-white transition">教程库</Link>
               <Link href="/skills" className="text-sm text-gray-400 hover:text-white transition">技能市场</Link>
             </div>
-            <button className="md:hidden text-gray-400">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
           </div>
         </div>
       </nav>
 
       {/* Header */}
-      <header className="pt-40 pb-16 px-6">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            教程资源库
+      <header className="pt-40 pb-20 px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
+            教程<span className="text-gradient">资源库</span>
           </h1>
-          <p className="text-lg text-gray-400">
+          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
             精选 OpenClaw 教程，从入门到精通
           </p>
         </div>
       </header>
 
       {/* Filters */}
-      <div className="sticky top-16 z-40 bg-black/80 backdrop-blur-xl border-b border-white/10">
+      <div className="sticky top-16 z-40 bg-black/50 backdrop-blur-xl border-y border-white/5">
         <div className="max-w-6xl mx-auto px-6 py-4">
           <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide">
-            <span className="px-4 py-2 bg-white text-black text-sm font-medium rounded-lg whitespace-nowrap">
+            <span className="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-sm font-medium rounded-lg whitespace-nowrap">
               全部
             </span>
             {['入门', '进阶', '部署', '技能开发', '安全'].map((cat) => (
@@ -65,7 +60,7 @@ export default function TutorialsPage() {
               href={tutorial.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group block p-6 bg-white/5 rounded-xl border border-white/10 hover:border-white/20 transition"
+              className="card group block p-6 rounded-xl"
             >
               <div className="flex items-start justify-between gap-4">
                 <div className="flex-1 min-w-0">
@@ -91,12 +86,7 @@ export default function TutorialsPage() {
                   </p>
                   <div className="flex flex-wrap gap-2 mt-3">
                     {tutorial.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="text-xs text-gray-500"
-                      >
-                        #{tag}
-                      </span>
+                      <span key={tag} className="text-xs text-gray-500">#{tag}</span>
                     ))}
                   </div>
                 </div>

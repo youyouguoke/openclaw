@@ -12,49 +12,44 @@ export default function SkillsPage() {
     : skills.filter(s => s.category === selectedCategory);
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen gradient-bg">
       {/* 导航栏 */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-xl border-b border-white/10">
-        <div className="max-w-6xl mx-auto px-6 py-4">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-black/50 backdrop-blur-xl border-b border-white/5">
+        <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <Link href="/" className="text-xl font-bold text-white">
-              🦞 OpenClaw
+            <Link href="/" className="text-2xl font-bold">
+              🦞 <span className="text-gradient">OpenClaw</span>
             </Link>
             <div className="hidden md:flex items-center gap-8">
               <Link href="/learn" className="text-sm text-gray-400 hover:text-white transition">学习路径</Link>
               <Link href="/tutorials" className="text-sm text-gray-400 hover:text-white transition">教程库</Link>
               <Link href="/skills" className="text-sm text-white transition">技能市场</Link>
             </div>
-            <button className="md:hidden text-gray-400">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
           </div>
         </div>
       </nav>
 
       {/* Header */}
-      <header className="pt-40 pb-16 px-6">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            技能市场
+      <header className="pt-40 pb-20 px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
+            技能<span className="text-gradient">市场</span>
           </h1>
-          <p className="text-lg text-gray-400">
+          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
             发现并安装 OpenClaw 社区技能
           </p>
         </div>
       </header>
 
       {/* Categories */}
-      <div className="sticky top-16 z-40 bg-black/80 backdrop-blur-xl border-b border-white/10">
+      <div className="sticky top-16 z-40 bg-black/50 backdrop-blur-xl border-y border-white/5">
         <div className="max-w-6xl mx-auto px-6 py-4">
           <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide">
             <button
               onClick={() => setSelectedCategory('全部')}
               className={`px-4 py-2 text-sm font-medium rounded-lg whitespace-nowrap transition ${
                 selectedCategory === '全部'
-                  ? 'bg-white text-black'
+                  ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white'
                   : 'bg-white/5 text-gray-400 border border-white/10 hover:bg-white/10 hover:text-white'
               }`}
             >
@@ -66,7 +61,7 @@ export default function SkillsPage() {
                 onClick={() => setSelectedCategory(cat)}
                 className={`px-4 py-2 text-sm font-medium rounded-lg whitespace-nowrap transition ${
                   selectedCategory === cat
-                    ? 'bg-white text-black'
+                    ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white'
                     : 'bg-white/5 text-gray-400 border border-white/10 hover:bg-white/10 hover:text-white'
                 }`}
               >
@@ -83,7 +78,7 @@ export default function SkillsPage() {
           {filteredSkills.map((skill) => (
             <div
               key={skill.id}
-              className="p-6 bg-white/5 rounded-xl border border-white/10 hover:border-white/20 transition"
+              className="card p-6 rounded-xl"
             >
               <div className="flex items-start justify-between mb-3">
                 <h3 className="text-lg font-semibold text-white">
@@ -117,7 +112,7 @@ export default function SkillsPage() {
       </div>
 
       {/* Install Guide */}
-      <section className="py-16 px-6 border-t border-white/10">
+      <section className="py-16 px-6 border-t border-white/5">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-2xl font-bold text-white text-center mb-8">
             如何安装技能
@@ -126,11 +121,11 @@ export default function SkillsPage() {
             {[
               { step: '1', title: '环境准备', desc: '已安装 OpenClaw' },
               { step: '2', title: '复制命令', desc: '复制安装命令' },
-              { step: '3', title: '运行安装', desc: '终端执行命令' },
+              { step: '3', title: '运行安装', desc: '终端执行' },
               { step: '4', title: '重启生效', desc: '重启 Gateway' },
             ].map((item) => (
               <div key={item.step} className="text-center p-4">
-                <div className="w-8 h-8 bg-white text-black text-sm font-bold rounded-full flex items-center justify-center mx-auto mb-2">
+                <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold mx-auto mb-3">
                   {item.step}
                 </div>
                 <h3 className="text-white font-medium text-sm mb-1">{item.title}</h3>
@@ -147,7 +142,7 @@ export default function SkillsPage() {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-6 border-t border-white/10">
+      <footer className="py-12 px-6 border-t border-white/5">
         <div className="max-w-6xl mx-auto text-center text-gray-500 text-sm">
           © 2026 OpenClaw 社区
         </div>
