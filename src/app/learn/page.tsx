@@ -54,12 +54,35 @@ const learningPath = [
 
 export default function LearnPage() {
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen gradient-bg">
+      {/* 导航栏 */}
+      <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/30 border-b border-white/5">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <Link href="/" className="text-xl font-bold">
+              <span className="text-gradient">🦞 OpenClaw</span>
+            </Link>
+            <div className="hidden md:flex items-center gap-6">
+              <Link href="/learn" className="text-sm text-white transition">学习路径</Link>
+              <Link href="/tutorials" className="text-sm text-gray-400 hover:text-white transition">教程库</Link>
+              <Link href="/skills" className="text-sm text-gray-400 hover:text-white transition">技能市场</Link>
+            </div>
+            <button className="md:hidden text-gray-400">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </nav>
+
       {/* Header */}
-      <header className="bg-white border-b border-slate-200">
-        <div className="container mx-auto px-4 py-8">
-          <h1 className="text-3xl font-bold text-slate-900 mb-2">📚 7 天学习路径</h1>
-          <p className="text-slate-600">
+      <header className="pt-32 pb-12 px-4 grid-bg">
+        <div className="container mx-auto">
+          <h1 className="text-3xl md:text-5xl font-bold mb-4">
+            <span className="text-gradient">📚 7 天学习路径</span>
+          </h1>
+          <p className="text-gray-400 text-lg max-w-2xl">
             从入门到精通，每天一个主题，系统化掌握 OpenClaw
           </p>
         </div>
@@ -67,44 +90,54 @@ export default function LearnPage() {
 
       {/* Learning Path */}
       <div className="container mx-auto px-4 py-12">
-        <div className="space-y-8">
+        <div className="space-y-6">
           {learningPath.map((day) => (
             <div
               key={day.day}
-              className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden"
+              className="tech-card rounded-2xl overflow-hidden"
             >
-              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 px-6 py-4 border-b border-slate-200">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">
+              <div className="bg-gradient-to-r from-blue-500/10 to-indigo-500/10 px-6 py-5 border-b border-white/5">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 text-white rounded-full flex items-center justify-center font-bold shadow-lg shadow-blue-500/30">
                     {day.day}
                   </div>
-                  <div>
-                    <h2 className="text-xl font-bold text-slate-900">
+                  <div className="flex-1">
+                    <h2 className="text-xl font-bold text-white">
                       Day {day.day}: {day.title}
                     </h2>
-                    <p className="text-slate-600 text-sm">{day.description}</p>
+                    <p className="text-gray-400 text-sm mt-1">{day.description}</p>
                   </div>
                 </div>
               </div>
               <div className="p-6">
-                <div className="mb-4">
-                  <h3 className="font-semibold text-slate-900 mb-2">学习内容</h3>
-                  <ul className="grid md:grid-cols-2 gap-2">
+                <div className="mb-5">
+                  <h3 className="font-semibold text-white mb-3 flex items-center gap-2">
+                    <svg className="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                    </svg>
+                    学习内容
+                  </h3>
+                  <div className="grid sm:grid-cols-2 gap-2">
                     {day.topics.map((topic, i) => (
-                      <li key={i} className="flex items-center gap-2 text-slate-700">
-                        <span className="w-1.5 h-1.5 bg-blue-600 rounded-full"></span>
-                        {topic}
-                      </li>
+                      <div key={i} className="flex items-center gap-3 p-2 rounded-lg bg-white/5">
+                        <span className="w-2 h-2 bg-blue-400 rounded-full flex-shrink-0"></span>
+                        <span className="text-gray-300 text-sm">{topic}</span>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-slate-900 mb-2">推荐资源</h3>
+                  <h3 className="font-semibold text-white mb-3 flex items-center gap-2">
+                    <svg className="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                    推荐资源
+                  </h3>
                   <div className="flex flex-wrap gap-2">
                     {day.resources.map((resource, i) => (
                       <span
                         key={i}
-                        className="text-sm bg-slate-100 text-slate-600 px-3 py-1 rounded-full"
+                        className="text-sm bg-white/5 text-gray-400 px-3 py-1.5 rounded-full border border-white/10 hover:border-blue-500/30 hover:text-blue-400 transition"
                       >
                         {resource}
                       </span>
@@ -118,28 +151,37 @@ export default function LearnPage() {
       </div>
 
       {/* CTA */}
-      <section className="bg-white border-t border-slate-200">
-        <div className="container mx-auto px-4 py-12 text-center">
-          <h2 className="text-2xl font-bold mb-4">准备好开始了吗？</h2>
-          <p className="text-slate-600 mb-6">
+      <section className="border-t border-white/5">
+        <div className="container mx-auto px-4 py-16 text-center">
+          <h2 className="text-2xl md:text-3xl font-bold mb-4">
+            <span className="text-gradient">准备好开始了吗？</span>
+          </h2>
+          <p className="text-gray-400 mb-8 max-w-xl mx-auto">
             按照学习路径循序渐进，或跳转到你感兴趣的主题
           </p>
-          <div className="flex gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/tutorials"
-              className="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition"
+              className="btn-primary"
             >
               浏览教程
             </Link>
             <Link
               href="/skills"
-              className="px-6 py-3 border border-slate-300 text-slate-700 rounded-lg font-medium hover:bg-slate-50 transition"
+              className="btn-secondary"
             >
               探索技能
             </Link>
           </div>
         </div>
       </section>
+
+      {/* Footer */}
+      <footer className="border-t border-white/5 py-12">
+        <div className="container mx-auto px-4 text-center text-gray-500 text-sm">
+          <p>© 2026 OpenClaw 社区 - 学习路径</p>
+        </div>
+      </footer>
     </div>
   );
 }
